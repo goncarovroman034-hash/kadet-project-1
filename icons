@@ -1,0 +1,9 @@
+kadet-project-1/
+├── index.html
+├── locations/
+├── archive/
+└── icons/          ← Новая папка
+    ├── plats.png    (иконка плаца)
+    ├── graduate.png (иконка выпуска)
+    ├── gym.png      (иконка спортзала)
+    └── dining.png   (иконка столовой)
