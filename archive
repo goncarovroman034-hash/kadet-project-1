@@ -1,0 +1,9 @@
+kadet-project-1/
+├── index.html
+├── background.jpg
+├── locations/
+└── archive/          ← Новая папка для фото
+    ├── 2012-1.jpg
+    ├── 2012-2.jpg
+    ├── 2019-1.jpg
+    └── 2025-1.jpg
