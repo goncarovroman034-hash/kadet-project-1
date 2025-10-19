@@ -117,8 +117,8 @@
                 year: '2015',
                 description: 'Общежитие в первые годы работы. Скромные условия, но уютная атмосфера.',
                 images: [
-                    'archive/dormitory-2015-1.jpg',
-                    'archive/dormitory-2015-2.jpg'
+                    'photos/dormitory-1.jpg',
+                    'photos/dormitory-2.jpg'
                 ]
             },
             'dormitory-2020': {
@@ -126,8 +126,8 @@
                 year: '2020', 
                 description: 'Капитальный ремонт общежития. Новые кровати, мебель и техника.',
                 images: [
-                    'archive/dormitory-2020-1.jpg',
-                    'archive/dormitory-2020-2.jpg'
+                    'photos/dormitory-1.jpg',
+                    'photos/dormitory-2.jpg'
                 ]
             },
             'dormitory-2024': {
@@ -135,14 +135,123 @@
                 year: '2024',
                 description: 'Общежитие сегодня: комфортные условия для жизни и учёбы.',
                 images: [
-                    'archive/dormitory-2024-1.jpg',
-                    'archive/dormitory-2024-2.jpg'
+                    'photos/dormitory-1.jpg',
+                    'photos/dormitory-2.jpg'
                 ]
             }
         };
 
-        // Остальной код (функции showArchive, goBack и т.д.) 
-        // такой же как в plats.html - просто скопируйте его
+        function showArchive(archiveId) {
+            const data = archiveData[archiveId];
+            const archiveHTML = `
+                <div class="archive-popup">
+                    <div class="popup-header">
+                        <h2>${data.title}</h2>
+                        <span class="year">${data.year}</span>
+                        <button class="close-btn" onclick="closePopup()">×</button>
+                    </div>
+                    <p class="description">${data.description}</p>
+                    <div class="gallery">
+                        ${data.images.map(img => `
+                            <div class="photo-item">
+                                <img src="${img}" alt="${data.title}">
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            const popupContainer = document.createElement('div');
+            popupContainer.className = 'archive-popup-container';
+            popupContainer.innerHTML = archiveHTML;
+            document.body.appendChild(popupContainer);
+
+            addPopupStyles();
+        }
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+
+        function closePopup() {
+            const popup = document.querySelector('.archive-popup-container');
+            if (popup) popup.remove();
+        }
+
+        function addPopupStyles() {
+            if (document.getElementById('popup-styles')) return;
+
+            const styles = `
+                <style id="popup-styles">
+                    .archive-popup-container {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0,0,0,0.9);
+                        z-index: 10000;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 20px;
+                    }
+                    .archive-popup {
+                        background: white;
+                        border-radius: 20px;
+                        padding: 25px;
+                        max-width: 90vw;
+                        max-height: 90vh;
+                        overflow-y: auto;
+                        color: #333;
+                        border: 3px solid #b30000;
+                    }
+                    .popup-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 15px;
+                        border-bottom: 2px solid #b30000;
+                        padding-bottom: 15px;
+                    }
+                    .popup-header h2 {
+                        margin: 0;
+                        color: #333;
+                        font-size: 1.4em;
+                    }
+                    .year {
+                        background: #b30000;
+                        color: white;
+                        padding: 5px 15px;
+                        border-radius: 20px;
+                        font-weight: bold;
+                    }
+                    .close-btn {
+                        background: none;
+                        border: none;
+                        font-size: 28px;
+                        cursor: pointer;
+                        color: #666;
+                    }
+                    .description {
+                        color: #666;
+                        font-style: italic;
+                        margin-bottom: 25px;
+                        line-height: 1.5;
+                    }
+                    .gallery {
+                        display: grid;
+                        gap: 20px;
+                    }
+                    .photo-item img {
+                        width: 100%;
+                        border-radius: 12px;
+                        border: 2px solid #ddd;
+                    }
+                </style>
+            `;
+            document.head.insertAdjacentHTML('beforeend', styles);
+        }
     </script>
 </body>
 </html>
