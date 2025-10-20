@@ -171,6 +171,7 @@
                         <button class="close-btn" onclick="closePopup()">×</button>
                     </div>
                     <p class="description">${data.description}</p>
+                    ${data.bio ? `<div class="bio-section"><h3>Биография:</h3><p>${data.bio}</p></div>` : ''}
                     <div class="gallery">
                         ${data.images.map(img => `
                             <div class="photo-item">
