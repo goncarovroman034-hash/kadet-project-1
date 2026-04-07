@@ -87,33 +87,33 @@
     </div>
 
     <div class="menu-container">
-        <button class="menu-btn" onclick="showArchive('dormitory-2015')">
-            <span class="btn-icon">🛏️</span>
+        <button class="menu-btn" onclick="showArchive('dormitory-game')">
+            <span class="btn-icon">🎮</span>
             <span class="btn-text">Игровая комната</span>
             <span class="btn-year">1</span>
         </button>
 
-        <button class="menu-btn" onclick="showArchive('dormitory-2020')">
-            <span class="btn-icon">🔄</span>
+        <button class="menu-btn" onclick="showArchive('dormitory-leisure')">
+            <span class="btn-icon">📺</span>
             <span class="btn-text">Комната досуга</span>
             <span class="btn-year">2</span>
         </button>
 
-        <button class="menu-btn" onclick="showArchive('dormitory-2024')">
-            <span class="btn-icon">⭐</span>
+        <button class="menu-btn" onclick="showArchive('dormitory-tea')">
+            <span class="btn-icon">🍵</span>
             <span class="btn-text">Чайная</span>
             <span class="btn-year">3</span>
         </button>
 
-         <button class="menu-btn" onclick="showArchive('dormitory-2025')">
-            <span class="btn-icon">⭐</span>
+        <button class="menu-btn" onclick="showArchive('dormitory-relax')">
+            <span class="btn-icon">😌</span>
             <span class="btn-text">Комната релаксации</span>
             <span class="btn-year">4</span>
         </button>
 
-         <button class="menu-btn" onclick="showArchive('dormitory-2026')">
-            <span class="btn-icon">⭐</span>
-            <span class="btn-text">Внутренний порядок-залог дисциплины!</span>
+        <button class="menu-btn" onclick="showArchive('dormitory-order')">
+            <span class="btn-icon">📋</span>
+            <span class="btn-text">Внутренний порядок - залог дисциплины!</span>
             <span class="btn-year">5</span>
         </button>
         
@@ -124,49 +124,62 @@
 
     <script>
         const archiveData = {
-            'dormitory-2026': {
+            'dormitory-game': {
                 title: 'Игровая комната',
                 year: '1',
                 description: 'Место где воспитанники проводят свободное время в уютной атмосфере.',
                 images: [
-                   '../photos/dormitory-1.jpg',
-                   '../photos/dormitory-2.jpg',
+                    '../photos/dormitory-1.jpg',
+                    '../photos/dormitory-2.jpg',
                     '../photos/dormitory-3.jpg',
                     '../photos/dormitory-4.jpg'
                 ]
             },
-            'dormitory-2026': {
+            'dormitory-leisure': {
                 title: 'Комната досуга',
                 year: '2020', 
-                description: '.',
+                description: 'Комната для отдыха и общения.',
                 images: [
                     '../photos/dormitory-6.jpg',
                     '../photos/dormitory-7.jpg',
                     '../photos/dormitory-10.jpg'
                 ]
             },
-            'dormitory-2026': {
+            'dormitory-tea': {
                 title: 'Чайная',
                 year: '2024',
-                description: 'Общежитие сегодня: комфортные условия для жизни и учёбы.',
+                description: 'Уютное место для чаепития и общения.',
                 images: [
                     '../photos/dormitory-5.jpg' 
                 ]
             },
-            'dormitory-2026': {
-    title: 'Комната релоксации',
-    year: '2025',
-    description: 'Комната для отдыха и релаксации кадетов.',
-    images: [
-        '../photos/dormitory-8.jpg',
-        '../photos/dormitory-9.jpg', 
-        '../photos/dormitory-11.jpg'
+            'dormitory-relax': {
+                title: 'Комната релаксации',
+                year: '2025',
+                description: 'Комната для отдыха и релаксации кадетов.',
+                images: [
+                    '../photos/dormitory-8.jpg',
+                    '../photos/dormitory-9.jpg', 
+                    '../photos/dormitory-11.jpg'
+                ]
+            },
+            'dormitory-order': {
+                title: 'Внутренний порядок - залог дисциплины!',
+                year: '2026',
+                description: 'Порядок и чистота в комнатах воспитанников.',
+                images: [
+                    '../photos/room-1.jpg',
+                    '../photos/room-2.jpg'
                 ]
             }
         };
 
         function showArchive(archiveId) {
             const data = archiveData[archiveId];
+            if (!data) {
+                alert('Раздел не найден!');
+                return;
+            }
             const archiveHTML = `
                 <div class="archive-popup">
                     <div class="popup-header">
@@ -184,12 +197,10 @@
                     </div>
                 </div>
             `;
-
             const popupContainer = document.createElement('div');
             popupContainer.className = 'archive-popup-container';
             popupContainer.innerHTML = archiveHTML;
             document.body.appendChild(popupContainer);
-
             addPopupStyles();
         }
 
@@ -204,7 +215,6 @@
 
         function addPopupStyles() {
             if (document.getElementById('popup-styles')) return;
-
             const styles = `
                 <style id="popup-styles">
                     .archive-popup-container {
