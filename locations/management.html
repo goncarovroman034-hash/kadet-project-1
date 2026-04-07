@@ -209,6 +209,26 @@
                 <button class="close-btn" onclick="closePopup()">×</button>
             </div>
             <p class="description">${data.description}</p>
+            // Добавляем краткую справку если есть
+let shortInfoHTML = '';
+if (data.shortInfo) {
+    shortInfoHTML = `
+        <div class="short-info">
+            <p>${data.shortInfo.replace(/\n/g, '<br>')}</p>
+        </div>
+    `;
+}
+
+// Добавляем биографию если есть
+let bioHTML = '';
+if (data.bio) {
+    bioHTML = `
+        <div class="bio-section">
+            <h3>Биография:</h3>
+            <p class="bio-text">${data.bio}</p>
+        </div>
+    `;
+}
             ${bioHTML}
             <div class="gallery">
                 ${galleryHTML}
