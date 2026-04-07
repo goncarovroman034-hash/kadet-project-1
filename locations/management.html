@@ -118,75 +118,94 @@
     </div>
 
     <script>
-       const archiveData = {
+  const archiveData = {
     'rukovodstvo-1': {
         title: 'Старший воспитатель-командир 1 учебной роты',
         year: 'Руководство',
         description: 'Морозов Юрий Анатольевич.',
-        bio: 'Родился 23 августа 1975 года в Краснодарском крае. Образование высшее. В 1997 году окончил Ростовское высшее военное командно-инженерное училище ракетных войск стратегического назначения имени главного маршала артиллерии Неделина М.И. В 2011 году окончил негосударственное образовательное учреждение высшего профессионального образования «Институт декоративно-прикладного искусства» по направлению «Педагог дополнительного образования- в военно-космическом кадетском корпусе с 2002 по 2010 на должностях старшего помощника начальника учебного отдела - 2 года, командира роты воспитанников - 6 лет;
-- с 2010 по 2011 год старший воспитатель военно-космического кадетского корпуса;
-- с 2011 года по настоящее время старший воспитатель Санкт-Петербургского кадетского военного корпуса;».',
+        bio: 'Родился 23 августа 1975 года в Краснодарском крае. Образование высшее. В 1997 году окончил Ростовское высшее военное командно-инженерное училище ракетных войск стратегического назначения имени главного маршала артиллерии Неделина М.И. В 2011 году окончил негосударственное образовательное учреждение высшего профессионального образования «Институт декоративно-прикладного искусства» по направлению «Педагог дополнительного образования». В военно-космическом кадетском корпусе с 2002 по 2010 на должностях: старшего помощника начальника учебного отдела - 2 года, командира роты воспитанников - 6 лет. С 2010 по 2011 год - старший воспитатель военно-космического кадетского корпуса. С 2011 года по настоящее время - старший воспитатель Санкт-Петербургского кадетского военного корпуса.',
         images: [
             '../photos/management-1.jpg'
         ]
     },
-            'rukovodstvo-2': {
-                title: 'Воспитатели',
-                year: 'Руководство',
-                description: 'Педагогические работники, отвечающие за воспитание и развитие кадетов.',
-                images: [
-                    '../photos/rukovodstvo-2-1.jpg',
-                    '../photos/rukovodstvo-2-2.jpg'
-                ]
-            },
-            'rukovodstvo-3': {
-                title: 'Младшие воспитатели',
-                year: 'Руководство', 
-                description: 'Помощники воспитателей, обеспечивающие повседневный быт и дисциплину.',
-                images: [
-                    '../photos/rukovodstvo-3-1.jpg',
-                    '../photos/rukovodstvo-3-2.jpg'
-                ]
-            },
-            'rukovodstvo-4': {
-                title: 'Педагог-организатор',
-                year: 'Руководство',
-                description: 'Специалист по организации внеурочной деятельности и мероприятий.',
-                images: [
-                    '../photos/rukovodstvo-4-1.jpg',
-                    '../photos/rukovodstvo-4-2.jpg'
-                ]
-            }
-        };
+    
+    'rukovodstvo-2': {
+        title: 'Воспитатели',
+        year: 'Руководство',
+        description: 'Педагогические работники, отвечающие за воспитание и развитие кадетов.',
+        images: [
+            { src: '../photos/teacher-1.jpg', caption: 'Иванов Иван Иванович - старший воспитатель' },
+            { src: '../photos/teacher-2.jpg', caption: 'Петров Петр Петрович - воспитатель' },
+            { src: '../photos/teacher-3.jpg', caption: 'Сидорова Анна Сергеевна - воспитатель' }
+        ]
+    },
+    
+    'rukovodstvo-3': {
+        title: 'Младшие воспитатели',
+        year: 'Руководство', 
+        description: 'Помощники воспитателей, обеспечивающие повседневный быт и дисциплину.',
+        images: [
+            '../photos/rukovodstvo-3-1.jpg',
+            '../photos/rukovodstvo-3-2.jpg'
+        ]
+    },
+    
+    'rukovodstvo-4': {
+        title: 'Педагог-организатор',
+        year: 'Руководство',
+        description: 'Специалист по организации внеурочной деятельности и мероприятий.',
+        images: [
+            '../photos/rukovodstvo-4-1.jpg',
+            '../photos/rukovodstvo-4-2.jpg'
+        ]
+    }
+};
 
        function showArchive(archiveId) {
-            const data = archiveData[archiveId];
-            const archiveHTML = `
-                <div class="archive-popup">
-                    <div class="popup-header">
-                        <h2>${data.title}</h2>
-                        <span class="year">${data.year}</span>
-                        <button class="close-btn" onclick="closePopup()">×</button>
-                    </div>
-                    <p class="description">${data.description}</p>
-                    ${data.bio ? `<div class="bio-section"><h3>Биография:</h3><p>${data.bio}</p></div>` : ''}
-                    <div class="gallery">
-                        ${data.images.map(img => `
+    const data = archiveData[archiveId];
+    if (!data) {
+        alert('Раздел не найден!');
+        return;
+    }
+    
+    // Проверяем, есть ли подписи у фото
+    const hasCaptions = data.images.length > 0 && typeof data.images[0] === 'object';
+    
+    const archiveHTML = `
+        <div class="archive-popup">
+            <div class="popup-header">
+                <h2>${data.title}</h2>
+                <span class="year">${data.year}</span>
+                <button class="close-btn" onclick="closePopup()">×</button>
+            </div>
+            <p class="description">${data.description}</p>
+            <div class="gallery">
+                ${data.images.map(img => {
+                    if (hasCaptions) {
+                        return `
+                            <div class="photo-item">
+                                <img src="${img.src}" alt="${img.caption}">
+                                <div class="photo-caption">${img.caption}</div>
+                            </div>
+                        `;
+                    } else {
+                        return `
                             <div class="photo-item">
                                 <img src="${img}" alt="${data.title}">
                             </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-
-            const popupContainer = document.createElement('div');
-            popupContainer.className = 'archive-popup-container';
-            popupContainer.innerHTML = archiveHTML;
-            document.body.appendChild(popupContainer);
-
-            addPopupStyles();
-        }
+                        `;
+                    }
+                }).join('')}
+            </div>
+        </div>
+    `;
+    
+    const popupContainer = document.createElement('div');
+    popupContainer.className = 'archive-popup-container';
+    popupContainer.innerHTML = archiveHTML;
+    document.body.appendChild(popupContainer);
+    addPopupStyles();
+}
 
         function goBack() {
             window.location.href = '../index.html';
