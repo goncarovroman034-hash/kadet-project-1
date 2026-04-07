@@ -282,6 +282,19 @@
                         border-radius: 12px;
                         border: 2px solid #ddd;
                     }
+                    .photo-caption {
+                        text-align: center;
+                        font-size: 14px;
+                        color: #555;
+                        margin-top: 8px;
+                        font-style: italic;
+                        background: rgba(0,0,0,0.05);
+                        padding: 5px;
+                        border-radius: 5px;
+                        word-wrap: break-word;
+                        overflow-wrap: break-word;
+                        max-width: 100%;
+                    }
                     .short-info {
                         margin: 15px 0;
                         padding: 12px;
@@ -310,6 +323,25 @@
                         color: #444;
                         line-height: 1.6;
                         margin: 0;
+                    }
+
+                    @media (max-width: 768px) {
+                        .photo-caption {
+                            font-size: 12px;
+                            padding: 4px;
+                        }
+                        .bio-text {
+                            font-size: 14px;
+                        }
+                        .short-info p {
+                            font-size: 14px;
+                        }
+                        .archive-popup {
+                            padding: 15px;
+                        }
+                        .popup-header h2 {
+                            font-size: 1.2em;
+                        }
                     }
                 </style>
             `;
