@@ -122,7 +122,7 @@
                 title: 'Старший воспитатель-командир 1 учебной роты',
                 year: 'Руководство',
                 description: 'Морозов Юрий Анатольевич.',
-                shortInfo: 'Должность: Старший воспитатель-командир учебной роты. Стаж: 20+ лет. Категория: Высшая.',
+                shortInfo: '📌 Должность: Старший воспитатель-командир учебной роты\n📌 Стаж: 20+ лет педагогической деятельности\n📌 Категория: Высшая квалификационная категория',
                 bio: 'В военно-космическом кадетском корпусе с 2002 по 2010. С 2011 года по настоящее время - старший воспитатель.',
                 images: ['../photos/management-1.jpg']
             },
@@ -131,9 +131,18 @@
                 year: 'Руководство',
                 description: 'Педагогические работники, отвечающие за воспитание и развитие кадетов.',
                 images: [
-                    '../photos/management-2.jpg',
-                    '../photos/management-3.jpg',
-                    '../photos/management-4.jpg'
+                    { 
+                        src: '../photos/management-2.jpg', 
+                        shortInfo: 'Карпов Сергей Александрович\n📌 Должность: Воспитатель\n📌 Стаж: с 2003 года\n📌 Категория: Высшая'
+                    },
+                    { 
+                        src: '../photos/management-3.jpg', 
+                        shortInfo: 'Нестеров Дмитрий Васильевич\n📌 Должность: Воспитатель\n📌 Стаж: с 2002 года\n📌 Категория: Высшая'
+                    },
+                    { 
+                        src: '../photos/management-4.jpg', 
+                        shortInfo: 'Котов Александр Юрьевич\n📌 Должность: Воспитатель\n📌 Стаж: с 2015 года\n📌 Категория: Первая'
+                    }
                 ]
             },
             'rukovodstvo-3': {
@@ -163,23 +172,44 @@
                 return;
             }
             
+            // Проверяем, есть ли у фото краткая справка
+            const hasShortInfo = data.images.length > 0 && typeof data.images[0] === 'object' && data.images[0].shortInfo;
+            
             let galleryHTML = '';
             for (let i = 0; i < data.images.length; i++) {
                 const img = data.images[i];
-                galleryHTML += `
-                    <div class="photo-item">
-                        <img src="${img}" alt="${data.title}">
-                    </div>
-                `;
+                
+                if (hasShortInfo && typeof img === 'object') {
+                    // Фото с краткой справкой
+                    let shortInfoHTML = '';
+                    if (img.shortInfo) {
+                        shortInfoHTML = '<div class="short-info"><p>' + img.shortInfo.replace(/\n/g, '<br>') + '</p></div>';
+                    }
+                    
+                    galleryHTML += `
+                        <div class="photo-item">
+                            <img src="${img.src}" alt="${img.shortInfo || data.title}">
+                            ${shortInfoHTML}
+                        </div>
+                    `;
+                } else {
+                    // Обычное фото
+                    const src = typeof img === 'object' ? img.src : img;
+                    galleryHTML += `
+                        <div class="photo-item">
+                            <img src="${src}" alt="${data.title}">
+                        </div>
+                    `;
+                }
             }
             
             let shortInfoHTML = '';
-            if (data.shortInfo) {
-                shortInfoHTML = '<div class="short-info"><p>' + data.shortInfo + '</p></div>';
+            if (data.shortInfo && !hasShortInfo) {
+                shortInfoHTML = '<div class="short-info"><p>' + data.shortInfo.replace(/\n/g, '<br>') + '</p></div>';
             }
             
             let bioHTML = '';
-            if (data.bio) {
+            if (data.bio && !hasShortInfo) {
                 bioHTML = '<div class="bio-section"><h3>Биография:</h3><p class="bio-text">' + data.bio + '</p></div>';
             }
             
@@ -282,19 +312,6 @@
                         border-radius: 12px;
                         border: 2px solid #ddd;
                     }
-                    .photo-caption {
-                        text-align: center;
-                        font-size: 14px;
-                        color: #555;
-                        margin-top: 8px;
-                        font-style: italic;
-                        background: rgba(0,0,0,0.05);
-                        padding: 5px;
-                        border-radius: 5px;
-                        word-wrap: break-word;
-                        overflow-wrap: break-word;
-                        max-width: 100%;
-                    }
                     .short-info {
                         margin: 15px 0;
                         padding: 12px;
@@ -326,13 +343,6 @@
                     }
 
                     @media (max-width: 768px) {
-                        .photo-caption {
-                            font-size: 12px;
-                            padding: 4px;
-                        }
-                        .bio-text {
-                            font-size: 14px;
-                        }
                         .short-info p {
                             font-size: 14px;
                         }
