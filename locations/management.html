@@ -111,6 +111,12 @@
             <span class="btn-year">👤</span>
         </button>
         
+        <button class="menu-btn" onclick="showArchive('rukovodstvo-5')">
+            <span class="btn-icon">🧠</span>
+            <span class="btn-text">Педагог-психолог</span>
+            <span class="btn-year">👤</span>
+        </button>
+        
         <button class="back-btn" onclick="goBack()">
             ← Назад к выбору объекта
         </button>
@@ -176,6 +182,13 @@
                     }
                 ]
             }
+            'rukovodstvo-5': {
+                title: 'Педагог-психолог',
+                year: 'Руководство',
+                description: 'Специалист по психологической поддержке и развитию кадетов.',
+                shortInfo: 'Базарова Ольга Германовна\n📌 Должность: Педагог-психолог\n📌 Стаж: с 2013 года\n📌 Категория: Высшая',
+                images: ['../photos/psychologist-1.jpg']
+                    }
         };
 
         function showArchive(archiveId) {
