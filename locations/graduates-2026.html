@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выпуск 2026 - Список кадетов</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(179, 0, 0, 0.9);
+            border-radius: 15px;
+            border: 2px solid #ff4444;
+        }
+        .search-box {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 10px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+        }
+        .list-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .graduate-item {
+            display: block;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(179, 0, 0, 0.5);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin: 10px 0;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .graduate-item:hover {
+            background: rgba(179, 0, 0, 0.3);
+            border-color: #ff4444;
+            transform: translateY(-2px);
+        }
+        .graduate-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .graduate-year {
+            font-size: 14px;
+            color: #ccc;
+            margin-top: 5px;
+        }
+        .back-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 30px auto 0;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #555;
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .count-info {
+            text-align: center;
+            margin: 15px 0;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎓 Выпуск 2026 года</h1>
+        <p>Список кадетов выпуска</p>
+    </div>
 
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 Поиск по фамилии..." onkeyup="filterList()">
+    </div>
+
+    <div class="count-info" id="countInfo">Всего: 49 кадетов</div>
+
+    <div class="list-container" id="graduatesList"></div>
+
+    <button class="back-btn" onclick="goBack()">← Назад к выбору выпуска</button>
+
+    <script>
+        const graduates = [
+            { id: 1, name: "Александров Александр Александрович", year: "2026" },
+            { id: 2, name: "Алексеев Алексей Алексеевич", year: "2026" },
+            { id: 3, name: "Андреев Андрей Андреевич", year: "2026" },
+            { id: 4, name: "Борисов Борис Борисович", year: "2026" },
+            { id: 5, name: "Васильев Василий Васильевич", year: "2026" }
+        ];
+
+        function displayList(filter = "") {
+            const container = document.getElementById('graduatesList');
+            const filtered = graduates.filter(g => 
+                g.name.toLowerCase().includes(filter.toLowerCase())
+            );
+            document.getElementById('countInfo').innerHTML = `Найдено: ${filtered.length} из 49 кадетов`;
+            container.innerHTML = filtered.map(g => `
+                <div class="graduate-item" onclick="openGraduate(${g.id})">
+                    <div class="graduate-name">${g.name}</div>
+                    <div class="graduate-year">Выпуск ${g.year} года</div>
+                </div>
+            `).join('');
+        }
+
+        function filterList() {
+            const searchValue = document.getElementById('searchInput').value;
+            displayList(searchValue);
+        }
+
+        function openGraduate(id) {
+            window.location.href = `graduate-2026.html?id=${id}`;
+        }
+
+        function goBack() {
+            window.location.href = 'plats.html';
+        }
+
+        displayList();
+    </script>
+</body>
+</html>
