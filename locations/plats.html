@@ -86,29 +86,29 @@
         <p>15 лет кадетскому корпусу</p>
     </div>
 
-    <div class="menu-container">
-        <button class="menu-btn" onclick="showArchive('plats-2012')">
-            <span class="btn-icon">📅</span>
-            <span class="btn-text">Выпуск</span>
-            <span class="btn-year">2012</span>
-        </button>
+  <div class="menu-container">
+    <button class="menu-btn" onclick="showArchive('plats-2012')">
+        <span class="btn-icon">📅</span>
+        <span class="btn-text">Выпуск</span>
+        <span class="btn-year">2012</span>
+    </button>
 
-        <button class="menu-btn" onclick="showArchive('plats-2019')">
-            <span class="btn-icon">🎖️</span>
-            <span class="btn-text">Выпуск</span>
-            <span class="btn-year">2019</span>
-        </button>
+    <button class="menu-btn" onclick="showArchive('plats-2019')">
+        <span class="btn-icon">🎖️</span>
+        <span class="btn-text">Выпуск</span>
+        <span class="btn-year">2019</span>
+    </button>
 
-        <button class="menu-btn" onclick="showArchive('plats-2025')">
-            <span class="btn-icon">💂</span>
-            <span class="btn-text">Выпуск</span>
-            <span class="btn-year">2026</span>
-        </button>
+    <button class="menu-btn" onclick="location.href='graduates-2026.html'">
+        <span class="btn-icon">🎓</span>
+        <span class="btn-text">Выпуск 2026 (список кадетов)</span>
+        <span class="btn-year">2026</span>
+    </button>
 
-        <button class="back-btn" onclick="goBack()">
-            ← Назад к выбору объекта
-        </button>
-    </div>
+    <button class="back-btn" onclick="goBack()">
+        ← Назад к выбору объекта
+    </button>
+</div>
 
     <script>
         const archiveData = {
@@ -128,15 +128,6 @@
                 images: [
                     'https://via.placeholder.com/400x300/0066cc/white?text=Учения+2019+Фото+1',
                     'https://via.placeholder.com/400x300/0066cc/white?text=Учения+2019+Фото+2'
-                ]
-            },
-            'plats-2025': {
-                title: 'Проекты будущего',
-                year: '2025',
-                description: 'Планы по модернизации плаца: установка современного освещения, трибун для зрителей и цифровых табло.',
-                images: [
-                    'https://via.placeholder.com/400x300/00aa00/white?text=Проекты+2025',
-                    'https://via.placeholder.com/400x300/00aa00/white?text=Визуализация'
                 ]
             }
         };
