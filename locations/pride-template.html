@@ -1,1 +1,193 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Герой - Цифровой код кадетства</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(179, 0, 0, 0.9);
+            border-radius: 15px;
+            border: 2px solid #ff4444;
+        }
+        .photo-gallery {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .photo-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+        }
+        .photo-item img {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid #b30000;
+        }
+        .photo-caption {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .info {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #555;
+            border-radius: 10px;
+            padding: 12px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 id="heroName">Наш герой</h1>
+        <p>Гордость корпуса</p>
+    </div>
+
+    <div class="info" id="heroInfo"></div>
+
+    <div class="photo-gallery" id="photoGallery"></div>
+
+    <button class="back-btn" onclick="goBack()">← Назад</button>
+
+    <script>
+        const heroesData = {
+            'green-chak': {
+                name: 'Гринчак Иван Андреевич',
+                year: 'Выпуск 2008',
+                description: 'Позывной "Учитель". Участник специальной военной операции. Проявил мужество и героизм при выполнении боевых задач.',
+                photos: [
+                    { src: '../photos/green-chak-1.jpg', caption: 'На службе' },
+                    { src: '../photos/green-chak-2.jpg', caption: 'С боевыми товарищами' }
+                ]
+            },
+            'andreenok': {
+                name: 'Андреёнок Николай Сергеевич',
+                year: 'Выпуск 2008',
+                description: 'Участник специальной военной операции. Награждён орденом Мужества.',
+                photos: [
+                    { src: '../photos/andreenok-1.jpg', caption: 'Фото 1' },
+                    { src: '../photos/andreenok-2.jpg', caption: 'Фото 2' }
+                ]
+            },
+            'nikolaev': {
+                name: 'Николаев Никита Игоревич',
+                year: 'Выпуск 2008',
+                description: 'Участник специальной военной операции. Проявил отвагу при защите интересов Родины.',
+                photos: [
+                    { src: '../photos/nikolaev-1.jpg', caption: 'Фото 1' },
+                    { src: '../photos/nikolaev-2.jpg', caption: 'Фото 2' }
+                ]
+            },
+            'povetkin': {
+                name: 'Поветкин Константин Евгеньевич',
+                year: 'Выпуск 2012',
+                description: 'Участник специальной военной операции. Награждён медалью "За отвагу".',
+                photos: [
+                    { src: '../photos/povetkin-1.jpg', caption: 'Фото 1' },
+                    { src: '../photos/povetkin-2.jpg', caption: 'Фото 2' }
+                ]
+            },
+            'lozhnikov': {
+                name: 'Ложников Матвей Сергеевич',
+                year: 'Выпуск 2012',
+                description: 'Участник специальной военной операции. Проявил мужество при выполнении боевых задач.',
+                photos: [
+                    { src: '../photos/lozhnikov-1.jpg', caption: 'Фото 1' },
+                    { src: '../photos/lozhnikov-2.jpg', caption: 'Фото 2' }
+                ]
+            },
+            'zhuro': {
+                name: 'Журо Станислав Андреевич',
+                year: 'Выпуск 2019',
+                description: 'Участник специальной военной операции. Награждён государственными наградами.',
+                photos: [
+                    { src: '../photos/zhuro-1.jpg', caption: 'Фото 1' },
+                    { src: '../photos/zhuro-2.jpg', caption: 'Фото 2' }
+                ]
+            },
+            'dmitriev': {
+                name: 'Дмитриев Павел Николаевич',
+                year: 'Выпуск 2019',
+                description: 'Участник специальной военной операции. Проявил героизм при выполнении задач.',
+                photos: [
+                    { src: '../photos/dmitriev-1.jpg', caption: 'Фото 1' },
+                    { src: '../photos/dmitriev-2.jpg', caption: 'Фото 2' }
+                ]
+            },
+            'kuznetsov': {
+                name: 'Кузнецов Ярослав Александрович',
+                year: 'Выпуск 2019',
+                description: 'Участник специальной военной операции. Награждён медалью "За отличие".',
+                photos: [
+                    { src: '../photos/kuznetsov-1.jpg', caption: 'Фото 1' },
+                    { src: '../photos/kuznetsov-2.jpg', caption: 'Фото 2' }
+                ]
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const heroId = urlParams.get('id');
+
+        function loadHero() {
+            const hero = heroesData[heroId];
+            if (!hero) {
+                document.getElementById('heroName').innerHTML = "Герой не найден";
+                return;
+            }
+            document.getElementById('heroName').innerHTML = hero.name;
+            document.getElementById('heroInfo').innerHTML = `
+                <strong>${hero.year}</strong><br>
+                ${hero.description}
+            `;
+            const gallery = document.getElementById('photoGallery');
+            gallery.innerHTML = hero.photos.map(photo => `
+                <div class="photo-item">
+                    <img src="${photo.src}" alt="${photo.caption}">
+                    <div class="photo-caption">${photo.caption}</div>
+                </div>
+            `).join('');
+        }
+
+        function goBack() {
+            window.location.href = 'pride.html';
+        }
+
+        loadHero();
+    </script>
+</body>
+</html>
