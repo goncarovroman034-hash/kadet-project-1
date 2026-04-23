@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дмитриев Павел - Цифровой код кадетства</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(179, 0, 0, 0.9);
+            border-radius: 15px;
+            border: 2px solid #ff4444;
+        }
+        .photo-gallery {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .photo-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+        }
+        .photo-item img {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid #b30000;
+        }
+        .photo-caption {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .info {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #555;
+            border-radius: 10px;
+            padding: 12px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .medal {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Дмитриев Павел Николаевич</h1>
+        <p>Герой России</p>
+    </div>
+
+    <div class="info">
+        <strong>Выпуск 2019 года</strong><br>
+        Участник специальной военной операции. Проявил героизм при выполнении боевых задач.<br>
+        <span class="medal">🏅 Герой Российской Федерации</span>
+    </div>
+
+    <div class="photo-gallery">
+        <div class="photo-item">
+            <img src="../photos/dmitriev-1.jpg" alt="Фото 1" onerror="this.src='https://via.placeholder.com/300x200?text=Фото+не+загружено'">
+            <div class="photo-caption">На службе</div>
+        </div>
+        <div class="photo-item">
+            <img src="../photos/dmitriev-2.jpg" alt="Фото 2" onerror="this.src='https://via.placeholder.com/300x200?text=Фото+не+загружено'">
+            <div class="photo-caption">С боевыми товарищами</div>
+        </div>
+    </div>
+
+    <button class="back-btn" onclick="goBack()">← Назад</button>
+
+    <script>
+        function goBack() {
+            window.location.href = 'pride.html';
+        }
+    </script>
+</body>
+</html>
