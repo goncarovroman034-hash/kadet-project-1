@@ -86,29 +86,29 @@
         <p>15 лет кадетскому корпусу</p>
     </div>
 
-  <div class="menu-container">
-    <button class="menu-btn" onclick="showArchive('plats-2012')">
-        <span class="btn-icon">📅</span>
-        <span class="btn-text">Выпуск</span>
-        <span class="btn-year">2012</span>
-    </button>
+    <div class="menu-container">
+        <button class="menu-btn" onclick="showArchive('plats-2012')">
+            <span class="btn-icon">📅</span>
+            <span class="btn-text">Выпуск</span>
+            <span class="btn-year">2012</span>
+        </button>
 
-    <button class="menu-btn" onclick="showArchive('plats-2019')">
-        <span class="btn-icon">🎖️</span>
-        <span class="btn-text">Выпуск</span>
-        <span class="btn-year">2019</span>
-    </button>
+        <button class="menu-btn" onclick="showArchive('plats-2019')">
+            <span class="btn-icon">🎖️</span>
+            <span class="btn-text">Выпуск</span>
+            <span class="btn-year">2019</span>
+        </button>
 
-    <button class="menu-btn" onclick="location.href='graduates-2026.html'">
-        <span class="btn-icon">🎓</span>
-        <span class="btn-text">Выпуск</span>
-        <span class="btn-year">2026</span>
-    </button>
+        <button class="menu-btn" onclick="location.href='graduates-2026.html'">
+            <span class="btn-icon">🎓</span>
+            <span class="btn-text">Выпуск</span>
+            <span class="btn-year">2026</span>
+        </button>
 
-    <button class="back-btn" onclick="goBack()">
-        ← Назад к выбору объекта
-    </button>
-</div>
+        <button class="back-btn" onclick="goBack()">
+            ← Назад к выбору объекта
+        </button>
+    </div>
 
     <script>
         const archiveData = {
@@ -117,27 +117,32 @@
                 year: '2012',
                 description: 'На плацу прошли первые масштабные строевые смотры между взводами. Заложили традицию ежегодных состязаний.',
                 images: [
-                     { src: "../photos/graduate2012-1-1.jpg", caption: "1 взвозд" },
-                    { src: "../photos/graduate2012-2-1.jpg", caption: "2 взвозд" },
-                    { src: "../photos/graduate2012-3-1.jpg", caption: "3 взвозд" },
-                    { src: "../photos/graduate2012-4-1.jpg", caption: "4 взвозд" }
+                    { src: "../photos/graduate2012-1-1.jpg", caption: "1 взвод" },
+                    { src: "../photos/graduate2012-2-1.jpg", caption: "2 взвод" },
+                    { src: "../photos/graduate2012-3-1.jpg", caption: "3 взвод" },
+                    { src: "../photos/graduate2012-4-1.jpg", caption: "4 взвод" }
                 ]
             },
             'plats-2019': {
                 title: '5 учебный курс 2017 год', 
                 year: '2019',
-                description: '',
+                description: 'Выпуск 2019 года',
                 images: [
-                   { src: "../photos/graduate2019-1-1.jpg", caption: "1 взвозд" },
-                    { src: "../photos/graduate2019-2-1.jpg", caption: "2 взвозд" },
-                    { src: "../photos/graduate2019-3-1.jpg", caption: "3 взвозд" },
-                    { src: "../photos/graduate2019-4-1.jpg", caption: "4 взвозд" }
+                    { src: "../photos/graduate2019-1-1.jpg", caption: "1 взвод" },
+                    { src: "../photos/graduate2019-2-1.jpg", caption: "2 взвод" },
+                    { src: "../photos/graduate2019-3-1.jpg", caption: "3 взвод" },
+                    { src: "../photos/graduate2019-4-1.jpg", caption: "4 взвод" }
                 ]
             }
         };
 
         function showArchive(archiveId) {
             const data = archiveData[archiveId];
+            if (!data) {
+                alert('Раздел не найден!');
+                return;
+            }
+            
             const archiveHTML = `
                 <div class="archive-popup">
                     <div class="popup-header">
@@ -149,7 +154,8 @@
                     <div class="gallery">
                         ${data.images.map(img => `
                             <div class="photo-item">
-                                <img src="${img}" alt="${data.title}">
+                                <img src="${img.src}" alt="${img.caption}">
+                                <div class="photo-caption">${img.caption}</div>
                             </div>
                         `).join('')}
                     </div>
@@ -160,7 +166,6 @@
             popupContainer.className = 'archive-popup-container';
             popupContainer.innerHTML = archiveHTML;
             document.body.appendChild(popupContainer);
-
             addPopupStyles();
         }
 
@@ -242,6 +247,13 @@
                         width: 100%;
                         border-radius: 12px;
                         border: 2px solid #ddd;
+                    }
+                    .photo-caption {
+                        text-align: center;
+                        font-size: 14px;
+                        color: #555;
+                        margin-top: 8px;
+                        font-style: italic;
                     }
                 </style>
             `;
